@@ -6,5 +6,5 @@ api_key = 'api_key'
 
 urls = {
     'include': 'colab_pauta.urls',
-    'prefix': '^pauta/',
+    'prefix': '^pautas/',
 }
