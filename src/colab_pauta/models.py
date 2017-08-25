@@ -9,7 +9,6 @@ class PautaAgenda(models.Model):
     initial_date = models.DateField()
     end_date = models.DateField()
     title = models.CharField(max_length=100)
-    description = models.TextField()
     votes_count = models.IntegerField(default=0)
     participants_count = models.IntegerField(default=0)
 
@@ -27,3 +26,13 @@ class PautaAgenda(models.Model):
     @property
     def is_closed(self):
         return date.today() > self.end_date
+
+
+class PautaGroup(models.Model):
+    id = models.IntegerField(primary_key=True)
+    agenda = models.ForeignKey(PautaAgenda, related_name='groups')
+    theme_slug = models.CharField(max_length=250)
+    theme_name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.theme_slug

@@ -59,6 +59,21 @@ class ColabPautaDataImporter(PluginDataImporter):
 
         for field in obj._meta.fields:
             try:
+                if field.name == 'agenda':
+                    agenda = models.PautaAgenda.objects.get(
+                        pk=data['agenda']['id']
+                    )
+                    obj.agenda = agenda
+                    continue
+
+                if field.name == 'theme_slug':
+                    obj.theme_slug = data['theme']['slug']
+                    continue
+
+                if field.name == 'theme_name':
+                    obj.theme_name = data['theme']['name']
+                    continue
+
                 if isinstance(field, DateTimeField):
                     value = parse_datetime(data[field.name])
                 else:
@@ -76,6 +91,14 @@ class ColabPautaDataImporter(PluginDataImporter):
             agenda = self.fill_object_data(models.PautaAgenda, data)
             agenda.save()
 
+    def fetch_groups(self):
+        json_data = self.get_json_data('proposalgroup')
+        for data in json_data:
+            group = self.fill_object_data(models.PautaGroup, data)
+            group.save()
+
     def fetch_data(self):
         models.PautaAgenda.objects.all().delete()
+        models.PautaGroup.objects.all().delete()
         self.fetch_agendas()
+        self.fetch_groups()
