@@ -21,25 +21,25 @@
           <ul class="card-list">
             {% for agenda in pauta_data %}
               <a class="info-card__link" href="{{agenda.get_url}}">
-                <li class="info-card info-card--pauta info-card--{{agenda.category.slug}}">
+                <li class="info-card info-card--pauta">
                   {% if agenda.is_closed %}
                     <div class="info-card__header info-card__header--closed">
                       <div class="info-card__icon info-card__icon--closed">
                         <i class="icon icon-calendar-times-o"></i>
                       </div>
-                      <h2 class="info-card__title">Pauta Fechada</h2>
+                      <h2 class="info-card__title">Votação Encerrada</h2>
                     </div>
                   {% else %}
                     <div class="info-card__header info-card__header--calendar">
                       <div class="info-card__icon info-card__icon--calendar">
                         <i class="icon icon-calendar-check-o"></i>
                       </div>
-                      <h2 class="info-card__title">Pauta Aberta</h2>
+                      <h2 class="info-card__title">Aberta Para Votação</h2>
                     </div>
                   {% endif %}
                   <h2 class="info-card__title">{{agenda.title|truncatechars:70}}</h2>
                   <p class="info-card__text">
-                    {{agenda.description|truncatechars:160}}
+                    Nesta edição, você pode incluir propostas dos temas {% for group in agenda.groups.all %}{% if forloop.first %}<span class="text__highlight">{{group.theme_name|title}}</span>{% elif forloop.last %} e <span class="text__highlight">{{group.theme_name|title}}</span>{% else %}, <span class="text__highlight">{{group.theme_name|title}}</span>{% endif %}{% endfor %}.
                   </p>
                   <div class="info-card__footer">
 
@@ -52,11 +52,6 @@
                       <div class="card-stats">
                         <div class="card-stats__name">Participantes</div>
                         <div class="card-stats__value {% if closed %}card-stats__value--closed{% endif %}">{{agenda.participants_count}}</div>
-                      </div>
-
-                      <div class="card-stats">
-                        <div class="card-stats__name">Votos</div>
-                        <div class="card-stats__value {% if closed %}card-stats__value--closed{% endif %}">{{agenda.votes_count}}</div>
                       </div>
                     {% endwith %}
                   </div>
