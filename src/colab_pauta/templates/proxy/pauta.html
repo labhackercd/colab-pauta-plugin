@@ -32,6 +32,13 @@
       <link rel="stylesheet" href="{% static 'scss/site-wrapper.scss' %}" type="text/x-scss" />
       <link rel="stylesheet" href="{% static 'scss/wikilegis/restyle.scss' %}" type="text/x-scss" />
     {% endcompress %}
+
+    <style>
+      #olark-wrapper button.olark-launch-button, #olark-wrapper div#olark-container {
+        left: 20px !important;
+        right: auto !important;
+      }
+    </style>
   </head>
 
   <body class="has-edem-nav {% if 'report' in request.path %}report{% endif %} {% if 'widget' in request.path %}widget{% endif %}">
