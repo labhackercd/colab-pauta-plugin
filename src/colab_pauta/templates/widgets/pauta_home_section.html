@@ -39,7 +39,7 @@
                   {% endif %}
                   <h2 class="info-card__title">{{agenda.title|truncatechars:70}}</h2>
                   <p class="info-card__text">
-                    Nesta edição, você pode incluir propostas dos temas {% for group in agenda.groups.all %}{% if forloop.first %}<span class="text__highlight">{{group.theme_name|title}}</span>{% elif forloop.last %} e <span class="text__highlight">{{group.theme_name|title}}</span>{% else %}, <span class="text__highlight">{{group.theme_name|title}}</span>{% endif %}{% endfor %}.
+                    Nesta edição, consulta sobre projetos dos temas {% for group in agenda.groups.all %}{% if forloop.first %}<span class="text__highlight">{{group.theme_name|title}}</span>{% elif forloop.last %} e <span class="text__highlight">{{group.theme_name|title}}</span>{% else %}, <span class="text__highlight">{{group.theme_name|title}}</span>{% endif %}{% endfor %}.
                   </p>
                   <div class="info-card__footer">
 
