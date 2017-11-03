@@ -1,3 +1,10 @@
+// Open sidebar when accesing Pauta Participativa login links
+$(document).on('click', 'a[href^="/home?next="]', function(e){
+  e.preventDefault();
+  openEdemSidebar('signin');
+});
+
+// Overriding Pauta functions
 // Stick remaining votes taking into account .edem-topbar offset
 $(window).scroll(function(event) {
   Scroll.themeNavigation();
